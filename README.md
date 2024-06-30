@@ -1,6 +1,6 @@
 # GetGrainSize
 
-Analysis of metallography images comparing Melography and Clemex predictions to Ground Truth.
+Analysis of metallography images comparing Melography and Clemex predictions to Ground Truth (GT).
 
 ## Overview
 
@@ -8,8 +8,8 @@ This project involves processing and analyzing metallography images, comparing p
 
 ### Key Steps
 
-1. **Process human-tagged GT images into 256x256 squares** and analyze them using the Heyn intercept method.
-2. **Compare predictions from Melography and Clemex models**, excluding overlapping sections with the GT used during training.
+1. **Process human-tagged GT images into 256x256 squares** and analyze them using the Hyen intercept method.
+2. **Compare predictions from Mlography and Clemex models**, excluding overlapping sections with the GT used during training.
 3. **Create 256x256 squares for consistency** and perform meta-statistical analysis to extract mean, median, and variance for each group.
 
 ### Key Findings
@@ -23,11 +23,16 @@ This project involves processing and analyzing metallography images, comparing p
 - **Scripts**:
   - `grain_size.py`: Functions for calculating grain size.
   - `results.py`: Meta-statistical analysis and results presentation.
-  - `crop_images_with_gt.py`: Functions for cropping images with GT consideration.
-  - `crop_non_overlapping_crops.py`: Functions for cropping non-overlapping sections.
+  - `crop_images_gt.py`: Functions for cropping images into 256x256 with GT consideration.
+  - `crop_non_overlapping_crops.py`:  Functions for cropping non-overlapping sections with GT into 256x256 squares.
+
 - **Data Directories**:
-  - `data/`: Input images.
-  - `results/`: Processed images and statistical results.
+  - 'clemex_full_predictions/': Clemex model full prediction images.
+  - 'mlography_full_predictions/': Melography model full prediction images.
+  - 'labels_crops_128/': 128x128 labeled crops.
+  - 'Processed_predictions/': Directory to store processed predictions and GT results.
+
+
 ## Usage Instructions
 
 1. **Clone the Repository**:
