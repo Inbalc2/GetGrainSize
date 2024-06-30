@@ -101,6 +101,7 @@ def main():
     parser.add_argument('--zones_path', type=str, required=True, help='Path to crops with the zones in their filename.')
     parser.add_argument('--output_path', type=str, required=True, help='Path to the output directory.')
     parser.add_argument('--mlography_path', type=str, required=True, help='Path to the metalography predictions directory.')
+    parser.add_argument('--gt_path', type=str, required=True, help='Path to the ground truth images directory of crops 128x128.')
     
     args = parser.parse_args()
 
@@ -108,26 +109,27 @@ def main():
     zones_path = args.zones_path
     output_path = args.output_path
     mlography_path = args.mlography_path
+    gt_path = args.gt_path
 
     clemex_128_out = os.path.join(output_path, 'clemex_predictions_squares_128')
     clemex_256_path = os.path.join(output_path, 'clemex_unified_crops_256')
     process_images(clemex_path, zones_path, clemex_128_out)
     create_directory(clemex_256_path)
-    unify_crops(output_path, clemex_256_path)
+    unify_crops(clemex_128_out, clemex_256_path)
 
-    
     mlography_128_out = os.path.join(output_path, 'mlography_predictions_squares_128')
     mlography_256_path = os.path.join(output_path, "mlography_predictions_unified_crops_256")
     process_images(mlography_path, zones_path, mlography_128_out)
     create_directory(mlography_256_path)
-    unify_crops(output_path_mlography, mlography_256_path)
+    unify_crops(mlography_128_out, mlography_256_path)
 
-    gt_path = os.path.join(output_path, "GT_256_crops")
-    create_directory(gt_path)
-    unify_crops(gt_path, gt_path)
+    gt_256_path = os.path.join(output_path, "GT_unified_crops_256")
+    create_directory(gt_256_path)
+    unify_crops(gt_path, gt_256_path)
+    
     # Apply Guo-Hall thinning to the masks 
     process_img(clemex_256_path, clemex_256_path)
-    process_img(gt_path, gt_path)
+    process_img(gt_256_path, gt_256_path)
 
 if __name__ == "__main__":
     main()
