@@ -1,4 +1,5 @@
 import statistics
+import pandas as pd
 
 def compute_statistics(data, label):
     """Compute and print statistics for a given dataset."""
