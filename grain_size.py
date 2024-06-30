@@ -43,7 +43,7 @@ def output(msg):
     print(msg)
 
 
-def grainsize(croppedlist, linenum,output_dir="/Users/inbal/Desktop/Metallography_2/results_hyen_256_before"):
+def grainsize(croppedlist, linenum,output_dir):
 
     output("\n-- Measure Grain Size --")
     grain_sizes = []
@@ -181,6 +181,7 @@ def grainsize(croppedlist, linenum,output_dir="/Users/inbal/Desktop/Metallograph
 
 
 def calculate_statistics(data):
+    #Calculate mean, median, and standard deviation of grain sizes.
     mean_grain_size = round(np.mean(data), 2)
     median_grain_size = round(np.median(data), 2)
     std_grain_size = round(np.std(data), 2)
@@ -192,6 +193,7 @@ def calculate_statistics(data):
     }
 
 def analyze_images(image_dirs):
+    #Analyze images from the provided directories and calculate grain sizes.
     model_zone_data = []
 
     for folder, model in image_dirs:
@@ -204,7 +206,7 @@ def analyze_images(image_dirs):
             print(f"No TIFF, JPG, or PNG files found in {folder}")
             continue
 
-        model_output_dir = os.path.join("/Users/inbal/Desktop/Metallography_2/results_hyen_256_", model.replace(" ", "_"))
+        model_output_dir = os.path.join(f"results_hyen_256_{model.replace(' ', '_')}")
         os.makedirs(model_output_dir, exist_ok=True)
 
         for target_filename in target_filenames:
@@ -234,23 +236,25 @@ def analyze_images(image_dirs):
 def main(args):
     sub_model_folders = [
         (args.gt_crops_path, "GT"),
-        ("/path/to/mlography_crops_256_no_gt", "Mlography_256_Predictions"),
-        ("/path/to/clemex_crops_256_no_gt", "Clemex_256_Predictions"),
+        (args.mlography_crops_path, "Mlography_256_Predictions"),
+        (args.clemex_crops_path, "Clemex_256_Predictions"),
     ]
 
-    output_base_dir = "/path/to/output_directory"
-    output(f"Output directory: {output_base_dir}")
-    
-    # Process images and store results
-    sub_model_data = analyze_images(sub_model_folders, output_base_dir)
+    output_base_dir = args.output_dir
+    output(f"Running grain size analysis...")
+    all_data = analyze_images(sub_model_folders, output_base_dir)
+    # Convert results to DataFrame and save to CSV file
+    output_df = pd.DataFrame(all_data)
+    output_df.to_csv(os.path.join(output_base_dir, "grain_size_analysis_results.csv"), index=False)
+    output(f"Analysis completed. Results saved to {output_base_dir}/grain_size_analysis_results.csv")
 
-    # Save results to CSV files
-    sub_model_df = pd.DataFrame(sub_model_data)
-    sub_model_csv_path = os.path.join(output_base_dir, "256_crops_results_before.csv")
-    sub_model_df.to_csv(sub_model_csv_path, index=False)
 
-    output(f"Results saved to: {sub_model_csv_path}")
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description='Grain size analysis for metallography images')
+    parser.add_argument('--gt_crops_path', type=str, required=True, help='Path to the directory containing GT crop images')
+    parser.add_argument('--mlography_crops_path', type=str, required=True, help='Path to the directory containing Mlography_256_Predictions crop images')
+    parser.add_argument('--clemex_crops_path', type=str, required=True, help='Path to the directory containing Clemex_256_Predictions crop images')
+    parser.add_argument('--output_dir', type=str, required=True, help='Directory to save the analysis results')
 
-if __name__ == "__main__":
-    parser = ...
-    main(parser.parse_args())
+    args = parser.parse_args()
+    main(args)
