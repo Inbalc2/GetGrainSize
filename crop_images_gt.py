@@ -96,6 +96,7 @@ def process_img(input_dir, output_dir):
 
 
 def main():
+    # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Process and unify images for metallography.")
     parser.add_argument('--clemex_path', type=str, required=True, help='Path to the clemex predictions directory.')
     parser.add_argument('--zones_path', type=str, required=True, help='Path to crops with the zones in their filename.')
@@ -111,18 +112,21 @@ def main():
     mlography_path = args.mlography_path
     gt_path = args.gt_path
 
+    # Process Clemex predictions and create unified crops
     clemex_128_out = os.path.join(output_path, 'clemex_predictions_squares_128')
     clemex_256_path = os.path.join(output_path, 'clemex_unified_crops_256')
     process_images(clemex_path, zones_path, clemex_128_out)
     create_directory(clemex_256_path)
     unify_crops(clemex_128_out, clemex_256_path)
 
+    # Process Mlography predictions and create unified crops
     mlography_128_out = os.path.join(output_path, 'mlography_predictions_squares_128')
     mlography_256_path = os.path.join(output_path, "mlography_predictions_unified_crops_256")
     process_images(mlography_path, zones_path, mlography_128_out)
     create_directory(mlography_256_path)
     unify_crops(mlography_128_out, mlography_256_path)
 
+    # Process Ground Truth (GT) images and create unified crops
     gt_256_path = os.path.join(output_path, "GT_unified_crops_256")
     create_directory(gt_256_path)
     unify_crops(gt_path, gt_256_path)
