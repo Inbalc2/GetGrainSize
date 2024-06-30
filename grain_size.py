@@ -231,9 +231,9 @@ def analyze_images(image_dirs):
     return model_zone_data
 
 
-def main():
+def main(args):
     sub_model_folders = [
-        ("/path/to/GT_256_crops_", "GT"),
+        (args.gt_crops_path, "GT"),
         ("/path/to/mlography_crops_256_no_gt", "Mlography_256_Predictions"),
         ("/path/to/clemex_crops_256_no_gt", "Clemex_256_Predictions"),
     ]
@@ -252,4 +252,5 @@ def main():
     output(f"Results saved to: {sub_model_csv_path}")
 
 if __name__ == "__main__":
-    main()
+    parser = ...
+    main(parser.parse_args())
