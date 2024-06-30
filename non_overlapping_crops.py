@@ -77,10 +77,8 @@ def main():
     parser.add_argument('--image_dir', type=str, required=True, help='Directory containing images to be cropped.')
     parser.add_argument('--output_dir', type=str, required=True, help='Directory to save cropped images.')
     parser.add_argument('--zone_size', type=int, nargs=2, default=(256, 256), help='Size of the cropping zone (width, height).')
-    parser.add_argument('--gt_image_dir', type=str, help='Directory containing ground truth images.')
-
+    parser.add_argument('--gt_image_dir', type=str, required=True, help='Directory containing ground truth images.')
     args = parser.parse_args()
-
     crop_images(args.image_dir, args.output_dir, zone_size=tuple(args.zone_size), gt_image_dir=args.gt_image_dir)
 
 if __name__ == "__main__":
