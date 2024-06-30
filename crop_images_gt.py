@@ -91,30 +91,36 @@ def process_img(input_dir, output_dir):
 
 
 def main():
-    clemex_path = '/Users/inbal/Desktop/Metallography_2/clemex_predictions_modified'
-    zones_path = '/Users/inbal/Desktop/Metallography_2/MLography/Segmentation/unet/data/squares_128/train/image'
-    output_path = '/Users/inbal/Desktop/Metallography_2/clemex_predictions_squares_128_'
+    parser = argparse.ArgumentParser(description="Process and unify images for metallography.")
+    parser.add_argument('--clemex_path', type=str, required=True, help='Path to the clemex predictions directory.')
+    parser.add_argument('--zones_path', type=str, required=True, help='Path to the zones directory.')
+    parser.add_argument('--output_path', type=str, required=True, help='Path to the output directory.')
+    args = parser.parse_args()
+
+    clemex_path = args.clemex_path
+    zones_path = args.zones_path
+    output_path = args.output_path
+
     process_images(clemex_path, zones_path, output_path)
 
-    clemex_256_path = '/Users/inbal/Desktop/Metallography_2/clemex_unified_crops_256_'
+    clemex_256_path = os.path.join(output_path, 'clemex_unified_crops_256')
     create_directory(clemex_256_path)
     unify_crops(output_path, clemex_256_path)
 
-    mlography_path = '/Users/inbal/Desktop/Metallography_2/metalography_predictions'
-    output_path_mlography = '/Users/inbal/Desktop/Metallography_2/mlography_predictions_squares_128_'
+    mlography_path = os.path.join(output_path, 'metalography_predictions')
+    output_path_mlography = os.path.join(output_path, 'mlography_predictions_squares_128')
     process_images(mlography_path, zones_path, output_path_mlography)
 
-    mlography_256_path = "/Users/inbal/Desktop/Metallography_2/mlography_predictions_unified_crops_256_"
+    mlography_256_path = os.path.join(output_path, "mlography_predictions_unified_crops_256")
     create_directory(mlography_256_path)
     unify_crops(output_path_mlography, mlography_256_path)
 
-    gt_path = "/Users/inbal/Desktop/Metallography_2/MLography/Segmentation/unet/data/squares_128/train/label"
-    gt_output_path = "/Users/inbal/Desktop/Metallography_2/GT_256_crops_"
-    create_directory(gt_output_path)  # Ensure the output directory is created
-    unify_crops(gt_path, gt_output_path)
+    gt_path = os.path.join(output_path, "GT_256_crops")
+    create_directory(gt_path)
+    unify_crops(gt_path, gt_path)
 
-    process_img(clemex_256_path,clemex_256_path)
-    process_img(gt_output_path,gt_output_path)
+    process_img(clemex_256_path, clemex_256_path)
+    process_img(gt_path, gt_path)
 
 if __name__ == "__main__":
     main()
