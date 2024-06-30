@@ -16,6 +16,7 @@ def extract_info_from_filename(filename):
         return None, None, None, None, None
 
 def parse_gt_files(gt_image_dir):
+    # Parse ground truth files to extract zones
     gt_zones = defaultdict(set)
     gt_files = [f for f in os.listdir(gt_image_dir) if f.endswith('.png')]
     for f in gt_files:
@@ -24,8 +25,8 @@ def parse_gt_files(gt_image_dir):
             gt_zones[modelname].add((x, y))
     return gt_zones
 
-#Check if the given coordinates overlap with ground truth zones.
 def x_y_in_gt(x, y, delta, gt_zones, modelname):
+    #Check if the given coordinates overlap with ground truth zones.
     for (x_gt, y_gt) in gt_zones[modelname]:
         if (x <= x_gt <= x + delta) and (y <= y_gt <= y + delta):
             return True
@@ -33,6 +34,7 @@ def x_y_in_gt(x, y, delta, gt_zones, modelname):
 
 #Crop images into smaller zones while avoiding specified ground truth zones.
 def crop_images(image_dir, output_dir, zone_size=(256, 256), gt_image_dir='/Users/inbal/Desktop/Metallography_2/MLography/Segmentation/unet/data/squares_128/train/inv_label'):
+    #Crop images into smaller zones while avoiding specified ground truth zones.
     if not os.path.exists(output_dir):
         os.makedirs(output_dir)
 
@@ -75,6 +77,7 @@ def crop_images(image_dir, output_dir, zone_size=(256, 256), gt_image_dir='/User
                 print(f"Saved {output_path}")
 
 def main():
+    # Parse command-line arguments
     parser = argparse.ArgumentParser(description="Crop images while avoiding specified ground truth zones.")
     parser.add_argument('--image_dir', type=str, required=True, help='Directory containing images to be cropped.')
     parser.add_argument('--output_dir', type=str, required=True, help='Directory to save cropped images.')
