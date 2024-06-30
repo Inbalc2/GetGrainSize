@@ -25,7 +25,10 @@ def compute_statistics(data, label):
     print(f"Sum: {sum_value}")
     print("-----------------------------------")
 
-def main():
+def main(df_path):
+    df = pd.read_csv(df_path)
+    datasets = {'GT': df['GT'].tolist(),}
+    
     datasets = {
         "GT": [
             41.14, 34.81, 37, 38.79, 34.09, 32.09, 32.78, 35.47, 49.17, 37.21, 
@@ -73,4 +76,7 @@ def main():
         compute_statistics(data, label)
 
 if __name__ == "__main__":
-    main()
+    parser = argparse.ArgumentParser()
+    parser.add_argument('--df_path', type=str, help='path to the csv results outputed from <>')
+    args = parser.parse_args()
+    main(args.df_path)
