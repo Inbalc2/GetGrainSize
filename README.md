@@ -1,10 +1,9 @@
 # GetGrainSize
 
-Analysis of metallography images comparing Melography and Clemex predictions to Ground Truth (GT).
+Analysis of metallography images using the Hyen intercept method, comparing Melography and Clemex predictions to Ground Truth (GT).
 
-## Overview
+![Sample Image](Data/Processed_predictions/GT/hyen_10-0-768.png)
 
-This project involves processing and analyzing metallography images, comparing predictions from Melography and Clemex models to Ground Truth (GT).
 
 ### Key Steps
 
