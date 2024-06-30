@@ -37,6 +37,6 @@ This project involves processing and analyzing metallography images, comparing p
 2. **Crop the GT images**:
    Run the script `crop_images_gt.py` in the following way:
    ```python
-python crop_images_gt.py --clemex_path <PATH TO CLEMEX PREDICITON>
+    python crop_images_gt.py --clemex_path <PATH TO CLEMEX PREDICITON> --zones_path <PATH TO 128 CROPS WITH THE NAME>
    ```
 
