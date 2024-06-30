@@ -8,7 +8,7 @@ This project involves processing and analyzing metallography images, comparing p
 
 ### Key Steps
 
-1. **Process human-tagged GT images into 256x256 squares** and analyze them using the  Heyn intercept method.
+1. **Process human-tagged GT images into 256x256 squares** and analyze them using the Heyn intercept method.
 2. **Compare predictions from Melography and Clemex models**, excluding overlapping sections with the GT used during training.
 3. **Create 256x256 squares for consistency** and perform meta-statistical analysis to extract mean, median, and variance for each group.
 
@@ -34,3 +34,4 @@ This project involves processing and analyzing metallography images, comparing p
 1. **Clone the Repository**:
    ```sh
    git clone https://github.com/Inbalc2/GetGrainSize.git
+
