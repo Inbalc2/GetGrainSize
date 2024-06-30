@@ -28,10 +28,15 @@ This project involves processing and analyzing metallography images, comparing p
 - **Data Directories**:
   - `data/`: Input images.
   - `results/`: Processed images and statistical results.
-
 ## Usage Instructions
 
 1. **Clone the Repository**:
    ```sh
    git clone https://github.com/Inbalc2/GetGrainSize.git
+
+2. **Crop the GT images**:
+   Run the script `crop_images_gt.py` in the following way:
+   ```python
+python crop_images_gt.py --clemex_path <PATH TO CLEMEX PREDICITON>
+   ```
 
