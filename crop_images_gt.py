@@ -10,6 +10,7 @@ def create_directory(path):
         os.makedirs(path, exist_ok=True)
 
 def map_images_by_index(images_path):
+    # Create a dictionary mapping image indices to their corresponding filenames
     images = [f'{images_path}/{f}' for f in os.listdir(images_path) if f.endswith('png')]
     mapper = defaultdict(list)
     for im in images:
@@ -24,20 +25,23 @@ def crop_and_save_images(full_image_path, zones, output_path):
         return
 
     for zone in zones:
+        # Parse the coordinates from the zone filename
         coords = os.path.basename(zone).split('.')[0].split('-')[1:]
         if len(coords) != 4:
             print(f"Invalid zone format for file {zone}. Skipping...")
             continue
 
         y, x, sy, sx = [int(e) for e in coords]
+        # Crop the specified zone from the full image
         crop = full_image[y + sy:y + sy + 128, x + sx:x + sx + 128]
         output_filename = f'{output_path}/{os.path.basename(zone)}'
         cv2.imwrite(output_filename, crop)
 
 def unify_crops(input_dir, output_dir, crop_size=256, unified_size=128):
-    create_directory(output_dir)  # Ensure the output directory is created
+    create_directory(output_dir)  
     files = sorted(os.listdir(input_dir))
     for i in range(0, len(files), 4):
+        # Create a new image to hold the unified crops
         unified_image = Image.new('RGB', (crop_size, crop_size), (0, 0, 0))
         for j in range(4):
             crop_image = Image.open(os.path.join(input_dir, files[i + j]))
@@ -56,6 +60,7 @@ def process_images(clemex_path, zones_path, output_path, full_image_ext='png'):
         if not os.path.exists(full_image_path):
             print(f"File {full_image_path} not found. Skipping...")
             continue
+        # Crop and save images from the full image based on the zones
         crop_and_save_images(full_image_path, mapper[k], output_path)
 
 
