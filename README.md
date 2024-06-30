@@ -2,7 +2,9 @@
 
 Analysis of metallography images using the Hyen intercept method, comparing Melography and Clemex predictions to Ground Truth (GT).
 
-![Sample Image](Data/Processed_predictions/GT/hyen_10-0-768.png)
+<div align="center">
+  <img src="Data/Processed_predictions/GT/hyen_10-0-768.png" alt="Sample Image">
+</div>
 
 
 ### Key Steps
