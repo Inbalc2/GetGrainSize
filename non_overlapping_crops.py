@@ -73,15 +73,15 @@ def crop_images(image_dir, output_dir, zone_size=(256, 256), gt_image_dir='/User
                 print(f"Saved {output_path}")
 
 def main():
-    mlography_image_dir = '/Users/inbal/Desktop/Metallography_2/metalography_predictions'
-    mlography_output_dir = '/Users/inbal/Desktop/Metallography_2/mlography_crops_256_no_gt'
-    gt_image_dir = '/Users/inbal/Desktop/Metallography_2/MLography/Segmentation/unet/data/squares_128/train/inv_label'
+    parser = argparse.ArgumentParser(description="Crop images while avoiding specified ground truth zones.")
+    parser.add_argument('--image_dir', type=str, required=True, help='Directory containing images to be cropped.')
+    parser.add_argument('--output_dir', type=str, required=True, help='Directory to save cropped images.')
+    parser.add_argument('--zone_size', type=int, nargs=2, default=(256, 256), help='Size of the cropping zone (width, height).')
+    parser.add_argument('--gt_image_dir', type=str, help='Directory containing ground truth images.')
 
-    clemex_image_dir = '/Users/inbal/Desktop/Metallography_2/clemex_predictions_modified'
-    clemex_output_dir = '/Users/inbal/Desktop/Metallography_2/mlography_crops_256_no_gt'
+    args = parser.parse_args()
 
-    # Crop images avoiding specified zones and ensuring 4 crops per model
-    crop_images(mlography_image_dir, mlography_output_dir, gt_image_dir=gt_image_dir)
-    crop_images(clemex_image_dir, clemex_output_dir, gt_image_dir=gt_image_dir)
+    crop_images(args.image_dir, args.output_dir, zone_size=tuple(args.zone_size), gt_image_dir=args.gt_image_dir)
+
 if __name__ == "__main__":
     main()
