@@ -5,8 +5,6 @@ import random
 import re
 from PIL import Image, ImageDraw
 import pandas as pd
-
-
 # Constants
 CUTOFF = 2 * np.sqrt(2) + 0.001     # cutting distance for grouping boundary
 L_CONST = 1.13                      # D = L_CONST * l_ave
@@ -235,25 +233,23 @@ def analyze_images(image_dirs):
 
 def main():
     sub_model_folders = [
-        ("/Users/inbal/Desktop/Metallography_2/GT_256_crops_", "GT"),
-        ("/Users/inbal/Desktop/Metallography_2/mlography_crops_256_no_gt", "Mlography_256_Predictions"),
-        ("/Users/inbal/Desktop/Metallography_2/mlography_crops_256_no_gt", "Clemex_256_Predictions"),
+        ("/path/to/GT_256_crops_", "GT"),
+        ("/path/to/mlography_crops_256_no_gt", "Mlography_256_Predictions"),
+        ("/path/to/clemex_crops_256_no_gt", "Clemex_256_Predictions"),
     ]
 
-    output_base_dir = "/Users/inbal/Desktop/Metallography_2/"
-    print(f"Output directory: {output_base_dir}")
+    output_base_dir = "/path/to/output_directory"
+    output(f"Output directory: {output_base_dir}")
     
     # Process images and store results
-    sub_model_data = analyze_images(sub_model_folders)
+    sub_model_data = analyze_images(sub_model_folders, output_base_dir)
 
     # Save results to CSV files
     sub_model_df = pd.DataFrame(sub_model_data)
     sub_model_csv_path = os.path.join(output_base_dir, "256_crops_results_before.csv")
     sub_model_df.to_csv(sub_model_csv_path, index=False)
 
-    print(f"Results saved to: {sub_model_csv_path}")
+    output(f"Results saved to: {sub_model_csv_path}")
 
 if __name__ == "__main__":
-    main() 
-
-
+    main()
