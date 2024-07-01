@@ -43,13 +43,13 @@ Analysis of metallography images using the Hyen intercept method, comparing Melo
 2. **Crop the GT images**:
    Run the script `crop_images_gt.py` in the following way:
    ```python
-    python crop_images.py --clemex_path <PATH_TO_CLEMEX_PREDICTIONS> --zones_path <PATH_TO_ZONES> --output_path <PATH_TO_OUTPUT_DIRECTORY> --mlography_path     
+    python crop_images_gt.py --clemex_path <PATH_TO_CLEMEX_PREDICTIONS> --zones_path <PATH_TO_ZONES> --output_path <PATH_TO_OUTPUT_DIRECTORY> --mlography_path     
     <PATH_TO_MLOGRAPHY_PREDICTIONS> --gt_path <PATH_TO_GROUND_TRUTH_IMAGES>
    ```
 3. **Process Non-overlapping Crops**:
    Run the script crop_non_overlapping_crops.py to crop non-overlapping sections into 256x256 squares:
    ```python
-   python crop_images_with_gt.py --image_dir <PATH TO IMAGE DIRECTORY> --output_dir <PATH TO OUTPUT DIRECTORY> --zone_size <WIDTH> <HEIGHT> --gt_image_dir <PATH TO GROUND TRUTH 
+   python non_overlapping_crops.py --image_dir <PATH TO IMAGE DIRECTORY> --output_dir <PATH TO OUTPUT DIRECTORY> --zone_size <WIDTH> <HEIGHT> --gt_image_dir <PATH TO GROUND TRUTH 
    IMAGE DIRECTORY>
    ```
 4.  **Calculate Grain Size**:
