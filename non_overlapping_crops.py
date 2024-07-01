@@ -1,6 +1,7 @@
 import cv2
 import os
 from collections import defaultdict
+import argparse
 
 def extract_info_from_filename(filename):
     #Extract model name and coordinates from the filename
