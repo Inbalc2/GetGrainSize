@@ -31,7 +31,7 @@ Analysis of metallography images using the Hyen intercept method, comparing Melo
   - 'clemex_full_predictions/': : Contains Clemex prediction images.
   - 'mlography_full_predictions/':  Contains Melography prediction images.
   - 'labels_crops_128/':  Contains 128x128 labeled crop images named in the format 
-  - 'Processed_predictions/': Directory to store processed predictions and GT results.
+  - 'Processed_predictions/': Directory to store 256x256 processed predictions and GT results with the Hyen intercept method.
 
 
 ## Usage Instructions
