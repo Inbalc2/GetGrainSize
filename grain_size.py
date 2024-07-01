@@ -4,7 +4,6 @@ import os
 import random
 import re
 from PIL import Image, ImageDraw
-import pandas as pd
 # Constants
 CUTOFF = 2 * np.sqrt(2) + 0.001     # cutting distance for grouping boundary
 L_CONST = 1.13                      # D = L_CONST * l_ave
