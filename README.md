@@ -67,7 +67,7 @@ Analysis of metallography images using the Hyen intercept method, comparing Melo
 ## Installation Requirements
   Ensure you have the following dependencies installed:
   ```sh
-  pip install pandas numpy opencv-python pillow 
+  pip install pandas numpy opencv-python pillow argparse
   ```
 
 ## Expected Output
