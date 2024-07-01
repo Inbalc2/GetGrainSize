@@ -53,6 +53,7 @@ def unify_crops(input_dir, output_dir, crop_size=256, unified_size=128):
         unified_image.save(os.path.join(output_dir, new_filename))
 
 def process_images(clemex_path, zones_path, output_path, full_image_ext='png'):
+    #Process and crop images based on the zones.
     create_directory(output_path)
     mapper = map_images_by_index(zones_path)
     for k in mapper:
@@ -77,8 +78,8 @@ def convert_to_color(thinned_image, original_image):
     combined_image = np.where(thinned_image[..., None] == 0, original_image, color_thinned_image)
     return combined_image
 
-# Process each image in the input directory and save the thinned images
 def process_img(input_dir, output_dir):
+    # Process each image in the input directory and save the thinned image
     for image_name in os.listdir(input_dir):
         if image_name.endswith(('.png', '.jpg', '.tif')):
             input_path = os.path.join(input_dir, image_name)
