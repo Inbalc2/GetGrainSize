@@ -1,35 +1,3 @@
-import pandas as pd
-import numpy as np
-import os
-import random
-import re
-from PIL import Image, ImageDraw
-# Constants
-CUTOFF = 2 * np.sqrt(2) + 0.001     # cutting distance for grouping boundary
-L_CONST = 1.13                      # D = L_CONST * l_ave
-
-
-def output(message):
-    print(message)
-
-import numpy as np
-from PIL import Image
-import random
-
-CUTOFF = 10  # Define a suitable cutoff distance for your problem
-L_CONST = 1  # Define a suitable L_CONST for your problem
-
-def output(msg):
-    print(msg)
-
-
-# Constants
-CUTOFF = 2 * np.sqrt(2) + 0.001     # cutting distance for grouping boundary
-L_CONST = 1.13                      # D = L_CONST * l_ave
-
-
-def output(message):
-    print(message)
 
 import numpy as np
 from PIL import Image
